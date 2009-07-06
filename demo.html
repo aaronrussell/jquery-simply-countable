@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>jquery.simplyCountable.js demo</title>
+	<style type="text/css" media="screen">
+	  * {font-family:Helvetica, Arial, sans-serif;}
+	  body {width:80%;}
+		.safe , .over {padding:3px; color:white; font-weight:bold;}
+		.safe {background:green;}
+		.over {background:red;}
+	</style>
+	<script type="text/javascript" charset="utf-8" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="jquery.simplyCountable.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function()
+		{
+		  $('#textzone').simplyCountable();
+		});
+	</script>
+</head>
+<body>
+	<h1>jQuery Simply Countable plugin demo</h1>
+	<p>Test how the plugin works by typing in the TEXTAREA.</p>
+	<form>
+	  <fieldset>
+  		<p>You have <span id="counter"></span> characters left.</p>
+  		<p><textarea id="textzone" cols="70" rows="8"></textarea></p>
+  		<p><input type="submit" value="Submit"></p>
+  	</fieldset>
+	</form>
+	<p>Copyright &copy; 2009 <a href="http://www.aaronrussell.co.uk">Aaron Russell</a>.
+</body>
