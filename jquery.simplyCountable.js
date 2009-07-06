@@ -1,5 +1,5 @@
 /*
-* jQuery Simply Countable Plugin
+* jQuery Simply Countable plugin
 * Provides a character counter for any text input or textarea
 * 
 * @version  0.1
