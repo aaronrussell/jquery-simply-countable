@@ -6,16 +6,16 @@ jQuery plugin that provides a character counter for any text input or textarea.
 
 Simple usage:
 
-`$('#my_textarea').simplyCountable();`
+    $('#my_textarea').simplyCountable();
 
 Advanced usage:
 
-`$('#my_textarea').simplyCountable({
-	counter: '#counter',
-	maxCount: 140,
-	safeClass: 'safe',
-	overClass: 'over'
-});`
+    $('#my_textarea').simplyCountable({
+        counter: '#counter',
+        maxCount: 140,
+        safeClass: 'safe',
+        overClass: 'over'
+    });
 
 ## Options
 
@@ -26,6 +26,6 @@ Advanced usage:
 
 ## License
 
-Copyright (c) 2009 [Aaron Russell](aaron@gc4.co.uk)
+Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) and [GPL](http://www.opensource.org/licenses/gpl-license.php) licenses.
 
-Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+Copyright (c) 2009 [Aaron Russell](aaron@gc4.co.uk)
