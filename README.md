@@ -28,4 +28,4 @@ Advanced usage:
 
 Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) and [GPL](http://www.opensource.org/licenses/gpl-license.php) licenses.
 
-Copyright (c) 2009 [Aaron Russell](http://www.aaronrussell.co.uk)
+Copyright (c) 2009 [Aaron Russell](http://www.aaronrussell.co.uk).

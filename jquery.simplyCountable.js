@@ -11,6 +11,9 @@
 * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
 */
 
+  // #TODO -  Add countdown or countup option
+  // #TODO -  Add ability to count words not characters
+
 (function($){
 
   $.fn.simplyCountable = function(options){
