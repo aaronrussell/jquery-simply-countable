@@ -29,7 +29,7 @@
     var countCheck = function(){
            
       if (options.countType === 'words'){
-        var count = options.maxCount - countable.val().split(' ').length;
+        var count = options.maxCount - countable.val().split(/[\s]+/).length;
         if (countable.val() === '') count += 1;
       }
       else var count = options.maxCount - countable.val().length;

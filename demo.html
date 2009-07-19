@@ -5,7 +5,9 @@
 	<title>jquery.simplyCountable.js demo</title>
 	<style type="text/css" media="screen">
 	  * {font-family:Helvetica, Arial, sans-serif;}
-	  body {width:80%;}
+	  body {width:800px;}
+	  pre {float:right; width:300px; background:#efefef; padding:6px 12px; margin:0; font:13px 'Courier New', Courier, monospace; font-weight:bold; color:#3b3b3b;}
+	  form {margin-bottom:30px;}
 		.safe , .over {padding:3px; color:white; font-weight:bold;}
 		.safe {background:green;}
 		.over {background:red;}
@@ -15,17 +17,36 @@
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function()
 		{
-		  $('#textzone').simplyCountable();
+		  $('#demo1').simplyCountable();
+		  $('#demo2').simplyCountable({
+		    counter: '#counter2',
+        countType: 'words',
+        maxCount: 10,
+        countDirection: 'up'
+		  });
 		});
 	</script>
 </head>
 <body>
 	<h1>jQuery Simply Countable plugin demo</h1>
-	<p>Test how the plugin works by typing in the TEXTAREA.</p>
 	<form>
-	  <fieldset>
+	  <fieldset><legend>Demo 1</legend>
   		<p>You have <span id="counter"></span> characters left.</p>
-  		<p><textarea id="textzone" cols="70" rows="8"></textarea></p>
+  		<pre>$('#demo1').simplyCountable();</pre>
+  		<p><textarea id="demo1" cols="50" rows="4"></textarea></p>
+  		<p><input type="submit" value="Submit"></p>
+  	</fieldset>
+	</form>
+	<form>
+	  <fieldset><legend>Demo 2</legend>
+  		<p>You have used <span id="counter2"></span> words.</p>
+      <pre>$('#demo2').simplyCountable({
+  counter: '#counter2',
+  countType: 'words',
+  maxCount: 10,
+  countDirection: 'up'
+});</pre>
+  		<p><textarea id="demo2" cols="50" rows="4"></textarea></p>
   		<p><input type="submit" value="Submit"></p>
   	</fieldset>
 	</form>
