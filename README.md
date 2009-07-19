@@ -2,9 +2,9 @@
 
 jQuery plugin that provides a character counter for any text input or textarea.
 
-* @version - 0.2
-* @homepage - [http://github.com/aaronrussell/jquery-simply-countable/]
-* @author - [Aaron Russell](http://www.aaronrussell.co.uk)
+* version - 0.2
+* homepage - [http://github.com/aaronrussell/jquery-simply-countable/](http://github.com/aaronrussell/jquery-simply-countable/)
+* author - [Aaron Russell](http://www.aaronrussell.co.uk)
 
 ## Usage
 
