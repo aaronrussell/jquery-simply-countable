@@ -2,7 +2,7 @@
 
 jQuery plugin that provides a character counter for any text input or textarea.
 
-* version - 0.2
+* version - 0.3
 * homepage - [http://github.com/aaronrussell/jquery-simply-countable/](http://github.com/aaronrussell/jquery-simply-countable/)
 * author - [Aaron Russell](http://www.aaronrussell.co.uk)
 
@@ -17,10 +17,12 @@ Advanced usage:
     $('#my_textarea').simplyCountable({
         counter: '#counter',
         countable: 'characters',
-        maxCount: 140,  
+        maxCount: 140,
+        strictMax: false,
         countDirection: 'down',
         safeClass: 'safe',
-        overClass: 'over'
+        overClass: 'over',
+        thousandSeparator: ','
     });
 
 ## Options
@@ -28,9 +30,11 @@ Advanced usage:
 * `counter` - A jQuery selector to match the 'counter' element. Defaults to `#counter`.
 * `countable` - Select whether to count `characters` or `words`. Defaults to `characters`.
 * `maxCount` - The maximum character count of the text input or textarea. Defaults to `140`.
+* `strictMax` - Limits the user from exceeding the maxCount. Defaults to `false`.
 * `countDirection` - Select whether to count `down` or `up`. Defaults to `down`.
 * `safeClass` - The CSS class applied to the counter element when it is within the maxCount figure. Defaults to `safe`.
 * `overClass` - The CSS class applied to the counter element when it exceeds the maxCount figure. Defaults to `over`.
+* `thousandSeparator` - The separator for multiples of 1,000. Set to `false` to disable. Defaults to `,`.
 
 ## License
 
