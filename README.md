@@ -29,8 +29,8 @@ Advanced usage:
 
 * `counter` - A jQuery selector to match the 'counter' element. Defaults to `#counter`.
 * `countable` - Select whether to count `characters` or `words`. Defaults to `characters`.
-* `maxCount` - The maximum character count of the text input or textarea. Defaults to `140`.
-* `strictMax` - Limits the user from exceeding the maxCount. Defaults to `false`.
+* `maxCount` - The maximum character (or word) count of the text input or textarea. Defaults to `140`.
+* `strictMax` - Prevents the user from being able to exceed the `maxCount`. Defaults to `false`.
 * `countDirection` - Select whether to count `down` or `up`. Defaults to `down`.
 * `safeClass` - The CSS class applied to the counter element when it is within the maxCount figure. Defaults to `safe`.
 * `overClass` - The CSS class applied to the counter element when it exceeds the maxCount figure. Defaults to `over`.
