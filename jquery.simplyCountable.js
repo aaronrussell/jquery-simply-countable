@@ -2,7 +2,7 @@
 * jQuery Simply Countable plugin
 * Provides a character counter for any text input or textarea
 * 
-* @version  0.3
+* @version  0.4
 * @homepage http://github.com/aaronrussell/jquery-simply-countable/
 * @author   Aaron Russell (http://www.aaronrussell.co.uk)
 *
@@ -16,67 +16,88 @@
   $.fn.simplyCountable = function(options){
     
     options = $.extend({
-      counter: '#counter',
-      countType: 'characters',
-      maxCount: 140,
-      strictMax: false,
-      countDirection: 'down',
-      safeClass: 'safe',
-      overClass: 'over',
-      thousandSeparator: ','
+      counter:            '#counter',
+      countType:          'characters',
+      wordSeparator:      ' ',
+      maxCount:           140,
+      strictMax:          false,
+      countDirection:     'down',
+      safeClass:          'safe',
+      overClass:          'over',
+      thousandSeparator:  ',',
+      onOverCount:        function(){},
+      onSafeCount:        function(){},
+      onMaxCount:         function(){}
     }, options);
     
     var countable = this;
+    var counter = $(options.counter);
+    if (!counter.length) { return false; }
+    regex = new RegExp('['+options.wordSeparator+']+');
     
     var countCheck = function(){
            
       var count;
+      var revCount;
+      
+      var reverseCount = function(ct){
+        return ct - (ct*2) + options.maxCount;
+      }
+      
+      var countInt = function(){
+        return (options.countDirection === 'up') ? revCount : count;
+      }
+      
+      var numberFormat = function(ct){
+        if (options.thousandSeparator){
+          ct = ct.toString();
+          for (var i = ct.length-3; i > 0; i -= 3){
+            ct = ct.substr(0,i) + options.thousandSeparator + ct.substr(i);
+          }
+        }
+        return ct;
+      }
       
       /* Calculates count for either words or characters */
       if (options.countType === 'words'){
-        count = options.maxCount - countable.val().split(/[\s]+/).length;
+        count = options.maxCount - $.trim(countable.val()).split(regex).length;
         if (countable.val() === ''){ count += 1; }
       }
       else { count = options.maxCount - countable.val().length; }
+      revCount = reverseCount(count);
       
       /* If strictMax set restrict further characters */
       if (options.strictMax && count <= 0){
         var content = countable.val();
+        if (count < 0 || content.match(new RegExp('['+options.wordSeparator+']$'))) {
+          options.onMaxCount(countInt(), countable, counter);
+        }
         if (options.countType === 'words'){
-          countable.val(content.split(/[\s]+/).slice(0, options.maxCount).join(' '));
+          countable.val(content.split(regex).slice(0, options.maxCount).join(options.wordSeparator));
         }
         else { countable.val(content.substring(0, options.maxCount)); }
-        count = 0;
+        count = 0, revCount = options.maxCount;
       }
       
-      /* Set CSS class rules */
-      if (!$(options.counter).hasClass(options.safeClass) && !$(options.counter).hasClass(options.overClass)){
-        if (count < 0){ $(options.counter).addClass(options.overClass); }
-        else { $(options.counter).addClass(options.safeClass); }
+      counter.text(numberFormat(countInt()));
+      
+      /* Set CSS class rules and API callbacks */
+      if (!counter.hasClass(options.safeClass) && !counter.hasClass(options.overClass)){
+        if (count < 0){ counter.addClass(options.overClass); }
+        else { counter.addClass(options.safeClass); }
       }
-      else if (count < 0 && $(options.counter).hasClass(options.safeClass)){
-        $(options.counter).removeClass(options.safeClass).addClass(options.overClass);
+      else if (count < 0 && counter.hasClass(options.safeClass)){
+        counter.removeClass(options.safeClass).addClass(options.overClass);
+        options.onOverCount(countInt(), countable, counter);
       }
-      else if (count >= 0 && $(options.counter).hasClass(options.overClass)){
-        $(options.counter).removeClass(options.overClass).addClass(options.safeClass);
+      else if (count >= 0 && counter.hasClass(options.overClass)){
+        counter.removeClass(options.overClass).addClass(options.safeClass);
+        options.onSafeCount(countInt(), countable, counter);
       }
       
-      /* If countDirect is 'up' then reverse the count */
-      if (options.countDirection === 'up'){
-        count = count - (count*2) + options.maxCount;
-      }
-      
-      /* Add thousandSeparator for those massive counts */
-      if (options.thousandSeparator){
-        count = count.toString();
-        for (var i = count.length-3; i > 0; i -= 3){
-          count = count.substr(0,i) + options.thousandSeparator + count.substr(i);
-        }
-      }
-      $(options.counter).text(count);
     };
-    countCheck();
     
+    countCheck();
     countable.keyup(countCheck);
     
   };
