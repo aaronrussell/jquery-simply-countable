@@ -49,13 +49,19 @@
       }
       
       var numberFormat = function(ct){
+        var prefix = '';
         if (options.thousandSeparator){
-          ct = ct.toString();
+          ct = ct.toString();          
+          // Handle large negative numbers
+          if (ct.match(/^-/)) { 
+            ct = ct.substr(1);
+            prefix = '-';
+          }
           for (var i = ct.length-3; i > 0; i -= 3){
             ct = ct.substr(0,i) + options.thousandSeparator + ct.substr(i);
           }
         }
-        return ct;
+        return prefix + ct;
       }
       
       /* Calculates count for either words or characters */
