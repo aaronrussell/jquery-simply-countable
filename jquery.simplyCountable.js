@@ -2,7 +2,7 @@
 * jQuery Simply Countable plugin
 * Provides a character counter for any text input or textarea
 * 
-* @version  0.4.1
+* @version  0.4.2
 * @homepage http://github.com/aaronrussell/jquery-simply-countable/
 * @author   Aaron Russell (http://www.aaronrussell.co.uk)
 *
@@ -105,6 +105,10 @@
     
     countCheck();
     countable.keyup(countCheck);
+    countable.bind('paste', function(){
+      // Wait a few miliseconds for the pasting
+      setTimeout(countCheck, 5);
+    });
     
   };
 
