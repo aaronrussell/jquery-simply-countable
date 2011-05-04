@@ -1,8 +1,8 @@
 # jQuery Simply Countable plugin
 
-jQuery plugin that provides a character counter for any text input or textarea.
+jQuery plugin that provides a character counter for any text input or textarea. Works when typing and pasting text using the mouse.
 
-* version - 0.4.1
+* version - 0.4.2
 * homepage - [http://github.com/aaronrussell/jquery-simply-countable/](http://github.com/aaronrussell/jquery-simply-countable/)
 * author - [Aaron Russell](http://www.aaronrussell.co.uk)
 
