@@ -16,6 +16,7 @@ Advanced usage:
 
     $('#my_textarea').simplyCountable({
         counter:            '#counter',
+        container:          document,
         countType:          'characters',
         wordSeparator:      ' ',
         maxCount:           140,
@@ -32,6 +33,7 @@ Advanced usage:
 ## Options
 
 * `counter` - A jQuery selector to match the 'counter' element. Defaults to `#counter`.
+* `container` - A jQuery selector that contains the form element and the 'counter' element in. Defaults to `document`.
 * `countType` - Select whether to count `characters` or `words`. Defaults to `characters`.
 * `wordSeparator` - The word separator when counting `words`. Defaults to _white-space_.
 * `maxCount` - The maximum character (or word) count of the text input or textarea. Defaults to `140`.
