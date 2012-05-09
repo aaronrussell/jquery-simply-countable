@@ -44,6 +44,10 @@ Advanced usage:
 * `onSafeCount` - Callback function called when counter goes below `maxCount` figure.
 * `onMaxCount` - Callback function called when in `strictMax` mode and counter hits `maxCount` figure.
 
+## Minification
+
+Done with [Google Closure Compiler](http://closure-compiler.appspot.com/home). Please use `Simple` optimization mode.
+
 ## License
 
 Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) and [GPL](http://www.opensource.org/licenses/gpl-license.php) licenses.
