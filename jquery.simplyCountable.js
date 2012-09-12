@@ -104,7 +104,11 @@
     };
     
     countCheck();
-    countable.keyup(countCheck);
+    var navKeys = [33,34,35,36,37,38,39,40];
+    countable.keyup(function(evt) {
+      if (navKeys.indexOf(evt.which) < 0)
+        countCheck();
+    });
     countable.bind('paste', function(){
       // Wait a few miliseconds for the pasting
       setTimeout(countCheck, 5);
