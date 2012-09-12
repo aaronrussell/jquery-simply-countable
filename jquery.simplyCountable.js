@@ -106,7 +106,7 @@
     countCheck();
     var navKeys = [33,34,35,36,37,38,39,40];
     countable.keyup(function(evt) {
-      if (navKeys.indexOf(evt.which) < 0)
+      if ($.inArray(evt.which, navKeys) < 0)
         countCheck();
     });
     countable.bind('paste', function(){
