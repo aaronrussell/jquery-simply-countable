@@ -63,6 +63,10 @@
         }
         return prefix + ct;
       }
+
+      var changeCountableValue = function(ct, value){
+        ct.val(value).trigger('change');
+      }
       
       /* Calculates count for either words or characters */
       if (options.countType === 'words'){
@@ -79,9 +83,11 @@
           options.onMaxCount(countInt(), countable, counter);
         }
         if (options.countType === 'words'){
-          countable.val(content.split(regex).slice(0, options.maxCount).join(options.wordSeparator));
+          changeCountableValue(countable, content.split(regex).slice(0, options.maxCount).join(options.wordSeparator));
         }
-        else { countable.val(content.substring(0, options.maxCount)); }
+        else {
+          changeCountableValue(countable, content.substring(0, options.maxCount));
+        }
         count = 0, revCount = options.maxCount;
       }
       
