@@ -32,7 +32,7 @@
     
     var countable = this;
     var counter = $(options.counter);
-    if (!counter.length) { return false; }
+    
     regex = new RegExp('['+options.wordSeparator+']+');
     
     var countCheck = function(){
@@ -85,20 +85,22 @@
         count = 0, revCount = options.maxCount;
       }
       
-      counter.text(numberFormat(countInt()));
-      
-      /* Set CSS class rules and API callbacks */
-      if (!counter.hasClass(options.safeClass) && !counter.hasClass(options.overClass)){
-        if (count < 0){ counter.addClass(options.overClass); }
-        else { counter.addClass(options.safeClass); }
-      }
-      else if (count < 0 && counter.hasClass(options.safeClass)){
-        counter.removeClass(options.safeClass).addClass(options.overClass);
-        options.onOverCount(countInt(), countable, counter);
-      }
-      else if (count >= 0 && counter.hasClass(options.overClass)){
-        counter.removeClass(options.overClass).addClass(options.safeClass);
-        options.onSafeCount(countInt(), countable, counter);
+      if (counter.length) {
+        counter.text(numberFormat(countInt()));
+        
+        /* Set CSS class rules and API callbacks */
+        if (!counter.hasClass(options.safeClass) && !counter.hasClass(options.overClass)){
+          if (count < 0){ counter.addClass(options.overClass); }
+          else { counter.addClass(options.safeClass); }
+        }
+        else if (count < 0 && counter.hasClass(options.safeClass)){
+          counter.removeClass(options.safeClass).addClass(options.overClass);
+          options.onOverCount(countInt(), countable, counter);
+        }
+        else if (count >= 0 && counter.hasClass(options.overClass)){
+          counter.removeClass(options.overClass).addClass(options.safeClass);
+          options.onSafeCount(countInt(), countable, counter);
+        }
       }
       
     };
