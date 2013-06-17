@@ -77,7 +77,7 @@
           options.onMaxCount(countInt(), countable, counter);
         }
         if (options.countType === 'words'){
-          var allowedText = content.match(/\s?(\S+\s+){5}/);
+          var allowedText = content.match( new RegExp('\\s?(\\S+\\s+){'+ options.maxCount +'}') );
           if (allowedText) {
             countable.val(allowedText[0]);
           }
