@@ -65,6 +65,10 @@
           }
           return prefix + ct;
         }
+
+        var changeCountableValue = function(val){
+          countable.val(val).trigger('change');
+        }
         
         /* Calculates count for either words or characters */
         if (options.countType === 'words'){
@@ -83,10 +87,10 @@
           if (options.countType === 'words'){
             var allowedText = content.match( new RegExp('\\s?(\\S+\\s+){'+ options.maxCount +'}') );
             if (allowedText) {
-              countable.val(allowedText[0]);
+              changeCountableValue(allowedText[0]);
             }
           }
-          else { countable.val(content.substring(0, options.maxCount)); }
+          else { changeCountableValue(content.substring(0, options.maxCount)); }
           count = 0, revCount = options.maxCount;
         }
         
