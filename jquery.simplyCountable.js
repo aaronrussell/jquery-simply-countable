@@ -105,10 +105,9 @@
     };
     
     countCheck();
-    countable.keyup(countCheck);
-    countable.bind('paste', function(){
-      // Wait a few miliseconds for the pasting
-      setTimeout(countCheck, 5);
+    countable.on('keyup blur paste', function(e) {
+      // Wait a few miliseconds if a paste event
+      setTimeout(countCheck, (e.type === 'paste' ? 5 : 0));
     });
     
   };
