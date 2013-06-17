@@ -18,7 +18,6 @@
     options = $.extend({
       counter:            '#counter',
       countType:          'characters',
-      wordSeparator:      ' ',
       maxCount:           140,
       strictMax:          false,
       countDirection:     'down',
@@ -33,7 +32,6 @@
     var countable = this;
     var counter = $(options.counter);
     if (!counter.length) { return false; }
-    regex = new RegExp('['+options.wordSeparator+']+');
     
     var countCheck = function(){
            
@@ -66,7 +64,7 @@
       
       /* Calculates count for either words or characters */
       if (options.countType === 'words'){
-        count = options.maxCount - $.trim(countable.val()).split(regex).length;
+        count = options.maxCount - $.trim(countable.val()).split(/\s+/).length;
         if (countable.val() === ''){ count += 1; }
       }
       else { count = options.maxCount - countable.val().length; }
@@ -75,11 +73,14 @@
       /* If strictMax set restrict further characters */
       if (options.strictMax && count <= 0){
         var content = countable.val();
-        if (count < 0 || content.match(new RegExp('['+options.wordSeparator+']$'))) {
+        if (count < 0) {
           options.onMaxCount(countInt(), countable, counter);
         }
         if (options.countType === 'words'){
-          countable.val(content.split(regex).slice(0, options.maxCount).join(options.wordSeparator));
+          var allowedText = content.match(/\s?(\S+\s+){5}/);
+          if (allowedText) {
+            countable.val(allowedText[0]);
+          }
         }
         else { countable.val(content.substring(0, options.maxCount)); }
         count = 0, revCount = options.maxCount;
