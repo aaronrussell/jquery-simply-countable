@@ -29,6 +29,8 @@
       onMaxCount:         function(){}
     }, options);
 
+    var navKeys = [33,34,35,36,37,38,39,40];
+
     return $(this).each(function(){
 
       var countable = $(this);
@@ -107,9 +109,21 @@
       };
       
       countCheck();
+
       countable.on('keyup blur paste', function(e) {
-        // Wait a few miliseconds if a paste event
-        setTimeout(countCheck, (e.type === 'paste' ? 5 : 0));
+        switch(e.type) {
+          case 'keyup':
+            // Skip navigational key presses
+            if ($.inArray(e.which, navKeys) < 0) { countCheck(); }
+            break;
+          case 'paste':
+            // Wait a few miliseconds if a paste event
+            setTimeout(countCheck, (e.type === 'paste' ? 5 : 0));
+            break;
+          default:
+            countCheck();
+            break;
+        }
       });
 
     });
