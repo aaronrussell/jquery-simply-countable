@@ -23,6 +23,7 @@ Advanced usage:
         safeClass:          'safe',
         overClass:          'over',
         thousandSeparator:  ',',
+        valueLength:        function(countable){},
         onOverCount:        function(count, countable, counter){},
         onSafeCount:        function(count, countable, counter){},
         onMaxCount:         function(count, countable, counter){}
@@ -38,6 +39,7 @@ Advanced usage:
 * `safeClass` - The CSS class applied to the counter element when it is within the maxCount figure. Defaults to `safe`.
 * `overClass` - The CSS class applied to the counter element when it exceeds the maxCount figure. Defaults to `over`.
 * `thousandSeparator` - The separator for multiples of 1,000. Set to `false` to disable. Defaults to `,`.
+* `valueLength` - Optional function that should return the effective length of the input or textarea value. `countType` will be ignored. Defaults to `null`.
 * `onOverCount` - Callback function called when counter goes over `maxCount` figure.
 * `onSafeCount` - Callback function called when counter goes below `maxCount` figure.
 * `onMaxCount` - Callback function called when in `strictMax` mode and counter hits `maxCount` figure.

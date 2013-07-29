@@ -5,8 +5,8 @@
 	<title>jquery.simplyCountable.js demo</title>
 	<style type="text/css" media="screen">
 	  * {font-family:Helvetica, Arial, sans-serif;}
-	  body {width:800px;}
-	  pre {float:right; width:300px; background:#efefef; padding:6px 12px; margin:0; font:13px 'Courier New', Courier, monospace; font-weight:bold; color:#3b3b3b;}
+	  body {width:1000px;}
+	  pre {float:right; width:500px; background:#efefef; padding:6px 12px; margin:0; font:13px 'Courier New', Courier, monospace; font-weight:bold; color:#3b3b3b;}
 	  form {margin-bottom:30px;}
 		.safe , .over {padding:3px; color:white; font-weight:bold;}
 		.safe {background:green;}
@@ -24,6 +24,14 @@
         countType: 'words',
         maxCount: 10,
         countDirection: 'up'
+		  });
+		  $('#demo3').simplyCountable({
+		    counter: '#counter3',
+        valueLength: function(countable){
+          return $.grep($.trim(countable.val()).split(/[.!?]\s+/),
+                        function(s, i){ return s != '' }).length;
+        },
+        maxCount: 4
 		  });
 		});
 	</script>
@@ -48,6 +56,21 @@
   countDirection: 'up'
 });</pre>
   		<p><textarea id="demo2" cols="50" rows="4"></textarea></p>
+  		<p><input type="submit" value="Submit"></p>
+  	</fieldset>
+	</form>
+	<form>
+	  <fieldset><legend>Demo 3</legend>
+  		<p>You have <span id="counter3"></span> sentences left.</p>
+      <pre>$('#demo3').simplyCountable({
+  counter: '#counter3',
+  valueLength: function(countable){
+    return $.grep($.trim(countable.val()).split(/[.!?]\s+/),
+                  function(s, i){ return s != '' }).length;
+  },
+  maxCount: 4
+});</pre>
+  		<p><textarea id="demo3" cols="50" rows="4"></textarea></p>
   		<p><input type="submit" value="Submit"></p>
   	</fieldset>
 	</form>
