@@ -24,6 +24,7 @@
       safeClass:          'safe',
       overClass:          'over',
       thousandSeparator:  ',',
+      valueLength:        null,
       onOverCount:        function(){},
       onSafeCount:        function(){},
       onMaxCount:         function(){}
@@ -70,8 +71,11 @@
           countable.val(val).trigger('change');
         }
         
-        /* Calculates count for either words or characters */
-        if (options.countType === 'words'){
+        /* Calculates count with valueLength function if defined, otherwise for either words or characters */
+        if (options.valueLength) {
+          count = options.maxCount - options.valueLength(countable);
+        }
+        else if (options.countType === 'words'){
           count = options.maxCount - $.trim(countable.val()).split(/\s+/).length;
           if (countable.val() === ''){ count += 1; }
         }
