@@ -24,6 +24,7 @@
       safeClass:          'safe',
       overClass:          'over',
       thousandSeparator:  ',',
+      additionalEvents:   '',
       onOverCount:        function(){},
       onSafeCount:        function(){},
       onMaxCount:         function(){}
@@ -114,7 +115,7 @@
       
       countCheck();
 
-      countable.on('keyup blur paste', function(e) {
+      countable.on($.trim('keyup blur paste ' + options.additionalEvents), function(e) {
         switch(e.type) {
           case 'keyup':
             // Skip navigational key presses
