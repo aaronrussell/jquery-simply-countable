@@ -5,15 +5,17 @@
 	<title>jquery.simplyCountable.js demo</title>
 	<style type="text/css" media="screen">
 	  * {font-family:Helvetica, Arial, sans-serif;}
-	  body {width:800px;}
-	  pre {float:right; width:300px; background:#efefef; padding:6px 12px; margin:0; font:13px 'Courier New', Courier, monospace; font-weight:bold; color:#3b3b3b;}
+	  body {width:1000px;}
+	  pre {float:right; width:500px; background:#efefef; padding:6px 12px; margin:0; font:13px 'Courier New', Courier, monospace; font-weight:bold; color:#3b3b3b;}
 	  form {margin-bottom:30px;}
 		.safe , .over {padding:3px; color:white; font-weight:bold;}
 		.safe {background:green;}
 		.over {background:red;}
 	</style>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/smoothness/jquery-ui.css" />
 	<script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 	<script type="text/javascript" charset="utf-8" src="jquery.simplyCountable.js"></script>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function()
@@ -25,6 +27,14 @@
         maxCount: 10,
         countDirection: 'up'
 		  });
+		  $('#demo5').autocomplete({
+        source: ['apple', 'blueberry', 'cherry', 'guava', 'kiwi', 'lemon', 'lime', 'mango',
+                 'nectarine', 'orange', 'peach', 'pear', 'strawberry', 'tangerine']
+      });
+		  $('#demo5').simplyCountable({
+        counter: '#counter5',
+        additionalEvents: 'autocompleteclose'
+      });
 		});
 	</script>
 </head>
@@ -48,6 +58,22 @@
   countDirection: 'up'
 });</pre>
   		<p><textarea id="demo2" cols="50" rows="4"></textarea></p>
+  		<p><input type="submit" value="Submit"></p>
+  	</fieldset>
+	</form>
+	<form>
+	  <fieldset><legend>Demo additional trigger for counting</legend>
+  		<p>Type a fruit name. You have <span id="counter5"></span> characters left.</p>
+      <pre>$('#demo5').autocomplete({
+  source: ['apple', 'blueberry', 'cherry', 'guava', 'kiwi',
+           'lemon', 'lime', 'mango', 'nectarine', 'orange',
+           'peach', 'pear', 'strawberry', 'tangerine']
+});
+$('#demo5').simplyCountable({
+  counter: '#counter5',
+  additionalEvents: 'autocompleteclose'
+});</pre>
+  		<p><input type="text" id="demo5" size="50"></p>
   		<p><input type="submit" value="Submit"></p>
   	</fieldset>
 	</form>
