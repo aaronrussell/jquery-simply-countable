@@ -41,6 +41,8 @@
              
         var count;
         var revCount;
+        var content = countable.val();
+        var lineBreaksCount = (content.match(/\n/g)||[]).length;
         
         var reverseCount = function(ct){
           return ct - (ct*2) + options.maxCount;
@@ -76,15 +78,13 @@
           if (countable.val() === ''){ count += 1; }
         }
         else {
-            var content = countable.val();
-            var lineBreaksCount = (content.match(/\n/g)||[]).length;
             count = options.maxCount - content.length - lineBreaksCount;
         }
         revCount = reverseCount(count);
         
         /* If strictMax set restrict further characters */
-        if (options.strictMax && count <= 0){
-          var content = countable.val();
+        if (options.strictMax && count <= 0) {
+          content = countable.val();
           if (count < 0) {
             options.onMaxCount(countInt(), countable, counter);
           }
@@ -94,7 +94,9 @@
               changeCountableValue(allowedText[0]);
             }
           }
-          else { changeCountableValue(content.substring(0, options.maxCount)); }
+          else {
+              changeCountableValue(content.substring(0, options.maxCount - lineBreaksCount));
+          }
           count = 0, revCount = options.maxCount;
         }
         
