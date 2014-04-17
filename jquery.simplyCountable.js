@@ -19,11 +19,15 @@
       counter:            '#counter',
       countType:          'characters',
       maxCount:           140,
+      minCount:           0,
       strictMax:          false,
+      allowEmpty:         false,
       countDirection:     'down',
+      underClass:         'under',
       safeClass:          'safe',
       overClass:          'over',
       thousandSeparator:  ',',
+      onUnderCount:       function(){},
       onOverCount:        function(){},
       onSafeCount:        function(){},
       onMaxCount:         function(){}
@@ -96,20 +100,39 @@
         
         counter.text(numberFormat(countInt()));
         
+        var removeClassesIfPresent = function (classesToRemove) {
+            var removedClasses = false;
+            classesToRemove.forEach(function(classToRemove) {
+                if (counter.hasClass(classToRemove)) {
+                    counter.removeClass(classToRemove);
+                    removedClasses = true;
+                }
+            });
+            return removedClasses > 0;
+        };
+
+        var getClassesToRemove = function(addedClass) {
+            var classes = [options.underClass, options.safeClass, options.overClass];
+            classes.splice(classes.indexOf(addedClass), 1);
+            return classes;
+        };
+
+        var setClassAndTriggerCallback = function(classToAdd, callback) {
+            if (!counter.hasClass(classToAdd)) {
+                counter.addClass(classToAdd);
+                var classesToRemove = getClassesToRemove(classToAdd);
+                if (removeClassesIfPresent(classesToRemove))
+                    callback(countInt(), countable, counter);
+            }
+        };
+          
         /* Set CSS class rules and API callbacks */
-        if (!counter.hasClass(options.safeClass) && !counter.hasClass(options.overClass)){
-          if (count < 0){ counter.addClass(options.overClass); }
-          else { counter.addClass(options.safeClass); }
-        }
-        else if (count < 0 && counter.hasClass(options.safeClass)){
-          counter.removeClass(options.safeClass).addClass(options.overClass);
-          options.onOverCount(countInt(), countable, counter);
-        }
-        else if (count >= 0 && counter.hasClass(options.overClass)){
-          counter.removeClass(options.overClass).addClass(options.safeClass);
-          options.onSafeCount(countInt(), countable, counter);
-        }
-        
+        if (revCount > options.maxCount)
+            setClassAndTriggerCallback(options.overClass, options.onOverCount);
+        else if (revCount < options.minCount && (revCount > 0 || !options.allowEmpty))
+            setClassAndTriggerCallback(options.underClass, options.onUnderCount);
+        else
+            setClassAndTriggerCallback(options.safeClass, options.onSafeCount);
       };
       
       countCheck();
