@@ -17,6 +17,7 @@
     
     options = $.extend({
       counter:            '#counter',
+      styleTarget:        undefined,
       countType:          'characters',
       maxCount:           140,
       minCount:           0,
@@ -40,6 +41,7 @@
       var countable = $(this);
       var counter = $(options.counter);
       if (!counter.length) { return false; }
+      var styleTarget = options.styleTarget ? $(options.styleTarget) : counter;
       
       var countCheck = function(){
              
@@ -103,8 +105,8 @@
         var removeClassesIfPresent = function (classesToRemove) {
             var removedClasses = false;
             classesToRemove.forEach(function(classToRemove) {
-                if (counter.hasClass(classToRemove)) {
-                    counter.removeClass(classToRemove);
+                if (styleTarget.hasClass(classToRemove)) {
+                    styleTarget.removeClass(classToRemove);
                     removedClasses = true;
                 }
             });
@@ -118,8 +120,8 @@
         };
 
         var setClassAndTriggerCallback = function(classToAdd, callback) {
-            if (!counter.hasClass(classToAdd)) {
-                counter.addClass(classToAdd);
+            if (!styleTarget.hasClass(classToAdd)) {
+                styleTarget.addClass(classToAdd);
                 var classesToRemove = getClassesToRemove(classToAdd);
                 if (removeClassesIfPresent(classesToRemove))
                     callback(countInt(), countable, counter);
