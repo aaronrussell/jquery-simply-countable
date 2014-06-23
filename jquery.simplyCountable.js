@@ -34,7 +34,18 @@
     return $(this).each(function(){
 
       var countable = $(this);
-      var counter = $(options.counter);
+      var counter;
+      
+      if (typeof(options.counter) == 'string'){
+        counter = $(options.counter);
+      }
+      else if (options.counter instanceof jQuery){
+        counter = options.counter;
+      }
+      else { 
+        throw new Error("The counter option must be a jQuery selector or a jQuery object.");
+      }
+
       if (!counter.length) { return false; }
       
       var countCheck = function(){
