@@ -43,7 +43,7 @@
         var revCount;
         
         var reverseCount = function(ct){
-          return ct - (ct*2) + options.maxCount;
+          return ct - (ct*2) + parseInt(options.maxCount);
         }
         
         var countInt = function(){
