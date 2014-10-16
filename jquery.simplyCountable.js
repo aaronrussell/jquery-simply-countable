@@ -24,6 +24,7 @@
       safeClass:          'safe',
       overClass:          'over',
       thousandSeparator:  ',',
+      onCount:            function(){},
       onOverCount:        function(){},
       onSafeCount:        function(){},
       onMaxCount:         function(){}
@@ -95,6 +96,8 @@
         }
         
         counter.text(numberFormat(countInt()));
+
+        options.onCount(countInt(), countable, counter);
         
         /* Set CSS class rules and API callbacks */
         if (!counter.hasClass(options.safeClass) && !counter.hasClass(options.overClass)){
