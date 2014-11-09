@@ -114,7 +114,7 @@
       
       countCheck();
 
-      countable.on('keyup blur paste', function(e) {
+      countable.on('input keyup blur paste', function(e) {
         switch(e.type) {
           case 'keyup':
             // Skip navigational key presses
