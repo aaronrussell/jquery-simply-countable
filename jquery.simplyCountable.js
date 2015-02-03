@@ -1,7 +1,7 @@
 /*
 * jQuery Simply Countable plugin
 * Provides a character counter for any text input or textarea
-* 
+*
 * @version  0.4.2
 * @homepage http://github.com/aaronrussell/jquery-simply-countable/
 * @author   Aaron Russell (http://www.aaronrussell.co.uk)
@@ -12,9 +12,10 @@
 */
 
 (function($){
+  "use strict";
 
   $.fn.simplyCountable = function(options){
-    
+
     options = $.extend({
       counter:            '#counter',
       countType:          'characters',
@@ -36,26 +37,26 @@
       var countable = $(this);
       var counter = $(options.counter);
       if (!counter.length) { return false; }
-      
+
       var countCheck = function(){
-             
+
         var count;
         var revCount;
-        
+
         var reverseCount = function(ct){
           return ct - (ct*2) + options.maxCount;
-        }
-        
+        };
+
         var countInt = function(){
           return (options.countDirection === 'up') ? revCount : count;
-        }
-        
+        };
+
         var numberFormat = function(ct){
           var prefix = '';
           if (options.thousandSeparator){
-            ct = ct.toString();          
+            ct = ct.toString();
             // Handle large negative numbers
-            if (ct.match(/^-/)) { 
+            if (ct.match(/^-/)) {
               ct = ct.substr(1);
               prefix = '-';
             }
@@ -64,12 +65,12 @@
             }
           }
           return prefix + ct;
-        }
+        };
 
         var changeCountableValue = function(val){
           countable.val(val).trigger('change');
-        }
-        
+        };
+
         /* Calculates count for either words or characters */
         if (options.countType === 'words'){
           count = options.maxCount - $.trim(countable.val()).split(/\s+/).length;
@@ -77,7 +78,7 @@
         }
         else { count = options.maxCount - countable.val().length; }
         revCount = reverseCount(count);
-        
+
         /* If strictMax set restrict further characters */
         if (options.strictMax && count <= 0){
           var content = countable.val();
@@ -91,11 +92,12 @@
             }
           }
           else { changeCountableValue(content.substring(0, options.maxCount)); }
-          count = 0, revCount = options.maxCount;
+          count = 0;
+          revCount = options.maxCount;
         }
-        
+
         counter.text(numberFormat(countInt()));
-        
+
         /* Set CSS class rules and API callbacks */
         if (!counter.hasClass(options.safeClass) && !counter.hasClass(options.overClass)){
           if (count < 0){ counter.addClass(options.overClass); }
@@ -109,9 +111,9 @@
           counter.removeClass(options.overClass).addClass(options.safeClass);
           options.onSafeCount(countInt(), countable, counter);
         }
-        
+
       };
-      
+
       countCheck();
 
       countable.on('keyup blur paste', function(e) {
@@ -131,7 +133,7 @@
       });
 
     });
-    
+
   };
 
 })(jQuery);
