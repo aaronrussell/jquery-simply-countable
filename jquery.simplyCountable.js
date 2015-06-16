@@ -69,18 +69,29 @@
         var changeCountableValue = function(val){
           countable.val(val).trigger('change');
         }
+
+        var getCountableContent = function() {
+          var textContent;
+
+          if( countable.prop("tagName") == 'DIV' && countable.attr('contenteditable') == 'true' ) {
+            textContent = countable.text();
+          } else {
+            textContent = countable.val();
+          }
+          return textContent;
+        }
         
         /* Calculates count for either words or characters */
         if (options.countType === 'words'){
-          count = options.maxCount - $.trim(countable.val()).split(/\s+/).length;
-          if (countable.val() === ''){ count += 1; }
+          count = options.maxCount - $.trim(getCountableContent()).split(/\s+/).length;
+          if (getCountableContent() === ''){ count += 1; }
         }
-        else { count = options.maxCount - countable.val().length; }
+        else { count = options.maxCount - getCountableContent().length; }
         revCount = reverseCount(count);
         
         /* If strictMax set restrict further characters */
         if (options.strictMax && count <= 0){
-          var content = countable.val();
+          var content = getCountableContent();
           if (count < 0) {
             options.onMaxCount(countInt(), countable, counter);
           }
